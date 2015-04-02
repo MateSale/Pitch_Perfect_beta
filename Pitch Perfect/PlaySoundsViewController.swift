@@ -72,7 +72,7 @@ class PlaySoundsViewController: UIViewController {
     }
     
     @IBAction func playDarthvaderAudio(sender: UIButton) {
-        playAudioWithVariablePitch(-800)
+        playAudioWithVariablePitch(-1000)
         
     }
     
