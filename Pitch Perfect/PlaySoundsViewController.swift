@@ -43,7 +43,6 @@ class PlaySoundsViewController: UIViewController {
         stopAudio()
         audioPlayer.rate = 1.5
         audioPlayer.play()
-        
        }
     
     @IBAction func playChipmunkAudio(sender: UIButton) {
@@ -78,12 +77,13 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func StopAudio(sender: UIButton) {
         audioPlayer.stop()
+        stopAudio()
+        
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     

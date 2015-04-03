@@ -12,7 +12,6 @@ import AVFoundation
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBOutlet weak var recordingInProgress: UILabel!
-    //IB interface builder
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
@@ -21,20 +20,16 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func viewWillAppear(animated: Bool) {
-        // hide stop buttion
         recordButton.enabled = true
         stopButton.hidden = true
         recordingInProgress.text = "Tap to record"
-        
     }
 
     @IBAction func recordAudio(sender: UIButton) {
@@ -42,9 +37,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.hidden = false
         recordingInProgress.text = "Recording"
         recordButton.enabled = false
-        //TODO: record user voice
+        //record user voice
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        
         
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
@@ -52,7 +46,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
-        //setuo audio session
+        //setup audio session
         var session = AVAudioSession.sharedInstance()
         session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         // initialize and prep
@@ -71,7 +65,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             // move to the next screen by segue
             self.performSegueWithIdentifier("stopRecording" , sender: recordedAudio)
         }else{
-            println("Recording failed")
             recordButton.enabled = true
             stopButton.hidden = true
         }
@@ -83,9 +76,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             let playSoundsVC: PlaySoundsViewController = segue.destinationViewController as PlaySoundsViewController
             let data = sender as RecordedAudio
             playSoundsVC.receivedAudio = data
-            
-    
-        }
+            }
     }
     
     @IBAction func stopAudio(sender: UIButton) {
